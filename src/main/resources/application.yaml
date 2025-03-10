@@ -2,7 +2,7 @@ spring:
   application:
     name: asset-spy-auth-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/asset-spy-db
+    url: jdbc:postgresql://localhost:5432/asset_spy_db
     username: postgres
     password: 123
     driver-class-name: org.postgresql.Driver
@@ -12,5 +12,5 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        default_schema: asset_spy_user_service_db
+        default_schema: asset_spy_auth_service_db
         format_sql: true
