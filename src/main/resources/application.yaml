@@ -12,5 +12,15 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        default_schema: asset_spy_auth_service_db
+        default_schema: asset_spy_user_service_db
         format_sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    default-schema: asset_spy_user_service_db
+jwt:
+  secret-key: co7IB8BVZ2ZCWoyjnKbrX4ByykVOvY38vtv2DNK9kN4=
+  expire-time-access-token: 900000
+  expire-time-refresh-token: 3
+scheduling:
+  fixed-rate: 900000

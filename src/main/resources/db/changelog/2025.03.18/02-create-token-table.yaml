@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025.03.18_01
+      author: vvsslova@mail.ru
+      changes:
+        - createTable:
+            schemaName: asset_spy_user_service_db
+            tableName: token
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: refresh_token
+                  type: uuid
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: expire_time
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: token
+            baseColumnNames: account_id
+            constraintName: FK_account_id
+            referencedTableName: account
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: RESTRICT
