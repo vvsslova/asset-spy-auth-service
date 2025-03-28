@@ -22,10 +22,11 @@ public class JwtService {
     @Value("${jwt.expire-time-access-token}")
     private Long expireTime;
 
-    public String generateAccessToken(String login) {
+    public String generateAccessToken(String login, String role) {
         log.info("Generating access token for user with login: {}", login);
 
         Map<String, Object> claims = new HashMap<>();
+        claims.put("role", role);
 
         return Jwts.builder()
                 .claims()
