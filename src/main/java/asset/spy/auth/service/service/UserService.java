@@ -82,7 +82,7 @@ public class UserService {
         AccountDetails account = (AccountDetails) auth.getPrincipal();
 
         log.info("Generating tokens");
-        String accessToken = getAccessToken(account.getUsername());
+        String accessToken = getAccessToken(account.getUsername(), account.getAccount().getRole());
         UUID refreshToken = getRefreshToken();
         log.info("Tokens was successfully generated");
 
@@ -112,7 +112,7 @@ public class UserService {
         UUID refreshToken = getRefreshToken();
         token.setRefreshToken(refreshToken);
         setExpireTime(token, token.getExpireTime());
-        String accessToken = getAccessToken(account.getLogin());
+        String accessToken = getAccessToken(account.getLogin(), account.getRole());
         log.info("Access token was successfully generated");
         log.info("Tokens was successfully refreshed");
 
@@ -123,11 +123,11 @@ public class UserService {
         return jwtService.generateRefreshToken();
     }
 
-    private String getAccessToken(String login) {
-        return jwtService.generateAccessToken(login);
+    private String getAccessToken(String login, String role) {
+        return jwtService.generateAccessToken(login, role);
     }
 
     private void setExpireTime(TokenEntity token, OffsetDateTime time) {
-        token.setExpireTime(time.plusDays(expireTime));
+        token.setExpireTime(time.plusHours(expireTime));
     }
 }
