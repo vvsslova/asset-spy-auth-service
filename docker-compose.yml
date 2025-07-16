@@ -1,0 +1,18 @@
+services:
+  auth-service:
+    build:
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "8085:8085"
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/asset_spy_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+    networks:
+      - asset-spy-network
+
+networks:
+  asset-spy-network:
+    name: asset-spy-network
