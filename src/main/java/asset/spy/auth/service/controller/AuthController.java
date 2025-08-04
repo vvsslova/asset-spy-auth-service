@@ -6,6 +6,7 @@ import asset.spy.auth.service.dto.RefreshTokenRequestDto;
 import asset.spy.auth.service.dto.RefreshTokenResponseDto;
 import asset.spy.auth.service.dto.RegistryRequestDto;
 import asset.spy.auth.service.dto.RegistryResponseDto;
+import asset.spy.auth.service.open.api.rest.AuthOpenApi;
 import asset.spy.auth.service.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/v1/auth")
-public class AuthController {
+public class AuthController implements AuthOpenApi {
     private final UserService userService;
 
     @PostMapping("/registry")

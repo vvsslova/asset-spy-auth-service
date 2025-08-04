@@ -1,11 +1,17 @@
 package asset.spy.auth.service.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
+@Schema(description = "DTO with refreshed tokens")
 public class RefreshTokenResponseDto {
+
+    @Schema(description = "Access token", example = "Some access token", requiredMode = Schema.RequiredMode.REQUIRED)
     private String accessToken;
+
+    @Schema(description = "Refresh token", requiredMode = Schema.RequiredMode.REQUIRED)
     private UUID refreshToken;
 }
