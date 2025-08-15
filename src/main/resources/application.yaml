@@ -1,5 +1,8 @@
 server:
   port: 8085
+  servlet:
+    context-path: /auth-service
+  forward-headers-strategy: framework
 spring:
   application:
     name: asset-spy-auth-service
@@ -26,3 +29,8 @@ jwt:
   expire-time-refresh-token: 3
 scheduling:
   fixed-rate: 900000
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
