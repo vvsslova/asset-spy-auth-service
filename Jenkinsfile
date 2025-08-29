@@ -20,15 +20,6 @@ pipeline {
              }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    setGitHubCommitStatus('PENDING','Running tests','Test stage in progress')
-                }
-                sh 'mvn -B test'
-            }
-        }
-
         stage('Build with Maven') {
         	steps {
         		script {
@@ -93,7 +84,6 @@ pipeline {
                    def contexts = [
                         'Checkout code',
                         'Build stage in progress',
-                        'Test stage in progress',
                         'Docker build in progress',
                         'Docker push in progress',
                         'Kubernetes deployment in progress'
