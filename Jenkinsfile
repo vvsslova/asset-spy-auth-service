@@ -1,6 +1,7 @@
 pipeline {
     agent any
-       environment {
+
+    environment {
         DOCKER_IMAGE = "vvsslova/asset-spy-auth-service"
         DOCKER_TAG = "${env.BUILD_NUMBER}"
         GITHUB_REPO = "vvsslova/asset-spy-auth-service"
@@ -99,6 +100,7 @@ pipeline {
                    ]
                    contexts.each { context ->
                         setGitHubCommitStatus(currentBuild.result ?: 'SUCCESS', 'Pipeline finished', context)
+                   }
              }
         }
     }
