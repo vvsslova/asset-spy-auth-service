@@ -104,8 +104,8 @@ pipeline {
     }
 }
 
-    def setGitHubCommitStatus(state, description, context) {
-        step([
+def setGitHubCommitStatus(state, description, context) {
+     step([
             $class: 'GitHubCommitStatusSetter',
             reposSource: [$class: 'ManuallyEnteredRepositorySource', url: "https://github.com/${env.GITHUB_REPO}"],
             contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: context],
@@ -115,6 +115,5 @@ pipeline {
                     [$class: 'AnyBuildResult', state: state, message: description]
                 ]
             ]
-        ])
-    }
+     ])
 }
