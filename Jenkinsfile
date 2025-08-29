@@ -29,7 +29,10 @@ pipeline {
         		script {
         			setGitHubCommitStatus('PENDING','Building project','Build stage in progress')
         		}
-        		sh 'mvn -B -DskipTests=true clean package'
+        		withEnv(['JAVA_TOOL_OPTIONS=-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400']) {
+                          sh 'mvn -B -DskipTests=true clean package'
+                }
+//         		sh 'mvn -B -DskipTests=true clean package'
         	}
         }
 
