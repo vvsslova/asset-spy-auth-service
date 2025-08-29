@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven:3.9.7'
+    }
+
     environment {
         DOCKER_IMAGE = "vvsslova/asset-spy-auth-service"
         DOCKER_TAG = "${env.BUILD_NUMBER}"
