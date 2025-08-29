@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         maven 'maven:3.9.7'
+        docker 'docker:latest'
     }
 
     environment {
@@ -29,21 +30,7 @@ pipeline {
         		script {
         			setGitHubCommitStatus('PENDING','Building project','Build stage in progress')
         		}
-//         		sh '''
-//                       (
-//                         while true; do
-//                           echo "[keepalive] $(date)"
-//                           sleep 60
-//                         done
-//                       ) &
-//                       WAITER=$!
-//                       mvn -B -DskipTests=true clean package
-//                       kill $WAITER
-//                     '''
-//         		withEnv(['JAVA_TOOL_OPTIONS=-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400']) {
-//                           sh 'mvn -B -DskipTests=true clean package'
-//                 }
-        		sh 'mvn -B -ntp -DskipTests=true -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=INFO clean package'
+        		sh 'mvn -B -DskipTests=true clean package'
         	}
         }
 
@@ -77,6 +64,9 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+            when {
+                branch 'main'
+            }
             steps {
             	script {
             		setGitHubCommitStatus('PENDING','Deploying to Kubernetes','Kubernetes deployment in progress')
