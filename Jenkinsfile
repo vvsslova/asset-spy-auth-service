@@ -24,6 +24,15 @@ pipeline {
              }
         }
 
+        stage('Test') {
+             steps {
+                  script {
+                        setGitHubCommitStatus('PENDING','Running tests','Test stage in progress')
+                  }
+                  sh 'mvn -B test'
+             }
+        }
+
         stage('Build with Maven') {
         	steps {
         		script {
