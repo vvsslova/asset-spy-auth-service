@@ -82,6 +82,7 @@ pipeline {
             	withCredentials([file(credentialsId: KUBECONFIG_CREDENTIALS_ID, variable: 'KUBECONFIG')]) {
             	sh '''
             	kubectl set image deploy/auth-service auth-service=${DOCKER_IMAGE}:${DOCKER_TAG} -n asset-spy
+            	kubectl rollout status deploy/products-service --timeout=180s -n asset-spy
             	'''
             	}
             }
